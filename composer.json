@@ -1,7 +1,7 @@
 {
-    "name": "hanymigame/laravel-notification-channel-sms-ru",
+    "name": "aldemco/laravel-notification-channel-sms-ru",
     "description": "This package makes it easy to send notifications using [sms.ru](https://sms.ru) (aka SMSRU) with Laravel 7.0+ (fomvasss/laravel-notification-channel-sms-ru fork)",
-    "homepage": "https://github.com/HanymiGame/laravel-notification-channel-sms-ru",
+    "homepage": "https://github.com/aldemco/laravel-notification-channel-sms-ru",
     "keywords": ["laravel", "notifications", "sms", "sms-ru", "СМС.RU"],
     "license": "MIT",
     "authors": [

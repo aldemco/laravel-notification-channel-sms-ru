@@ -1,0 +1,48 @@
+{
+    "name": "hanymigame/laravel-notification-channel-sms-ru",
+    "description": "This package makes it easy to send notifications using [sms.ru](https://sms.ru) (aka SMSRU) with Laravel 7.0+ (fomvasss/laravel-notification-channel-sms-ru fork)",
+    "homepage": "https://github.com/HanymiGame/laravel-notification-channel-sms-ru",
+    "keywords": ["laravel", "notifications", "sms", "sms-ru", "СМС.RU"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fomin Vasil",
+            "email": "fomvasss@gmail.com",
+            "homepage": "https://github.com/fomvasss",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.5",
+        "illuminate/notifications": "^7.0|^8.0|^9.0",
+        "illuminate/support": "^7.0|^8.0|^9.0",
+        "zelenin/smsru": "^4.1|^5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0|^9.0",
+        "mockery/mockery": "^1.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "NotificationChannels\\SmsRu\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NotificationChannels\\SmsRu\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "NotificationChannels\\SmsRu\\SmsRuServiceProvider"
+            ]
+        }
+    }
+}

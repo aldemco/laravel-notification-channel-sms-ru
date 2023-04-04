@@ -22,7 +22,7 @@ https://laravel.com/docs/master/notifications
 Install this package with Composer:
 
 ```bash
-composer require hanymigame/laravel-notification-channel-sms-ru
+composer require aldemco/laravel-notification-channel-sms-ru
 ```
 
 The service provider gets loaded automatically. Or you can do this manually:

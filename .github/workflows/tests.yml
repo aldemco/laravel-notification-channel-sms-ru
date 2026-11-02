@@ -38,6 +38,9 @@ jobs:
           tools: composer:v2
           coverage: none
 
+      - name: Allow archived Laravel versions in compatibility matrix
+        run: composer config --global policy.advisories.block false
+
       - name: Resolve dependencies for Laravel ${{ matrix.laravel }}
         run: >-
           composer update --prefer-dist --no-interaction --no-progress

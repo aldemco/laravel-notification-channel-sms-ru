@@ -6,6 +6,7 @@ https://laravel.com/docs/master/notifications
 
 ## Contents
 
+- [Upgrade note: SmsRuNotification interface](#upgrade-note-smsrunotification-interface)
 - [Installation](#installation)
     - [Setting up the SmsRu service](#setting-up-the-SmsRu-service)
 - [Usage](#usage)
@@ -16,6 +17,22 @@ https://laravel.com/docs/master/notifications
 - [Credits](#credits)
 - [License](#license)
 
+
+## Upgrade note: `SmsRuNotification` interface
+
+When updating to a package version that includes the `SmsRuNotification` interface, update each notification that uses the SMS.ru channel to implement it. This makes the `toSmsru()` contract explicit and prevents Intelephense from reporting the method as undefined. The notification must still provide its `toSmsru()` method and may return either a string or an `SmsRuMessage`.
+
+Add the interface import and implement it alongside Laravel's base `Notification` class:
+
+```php app/Notifications/AccountApproved.php
+use Illuminate\Notifications\Notification;
+use NotificationChannels\SmsRu\SmsRuNotification;
+
+class AccountApproved extends Notification implements SmsRuNotification
+{
+    // Keep your existing toSmsru($notifiable) method.
+}
+```
 
 ## Installation
 

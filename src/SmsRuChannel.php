@@ -4,8 +4,8 @@ namespace NotificationChannels\SmsRu;
 
 use Illuminate\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
-use NotificationChannels\SmsRu\Exceptions\CouldNotSendNotification;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\SmsRu\Exceptions\CouldNotSendNotification;
 
 class SmsRuChannel
 {
@@ -29,11 +29,12 @@ class SmsRuChannel
         $this->smsApi = $smsApi;
         $this->events = $events;
     }
+
     /**
      * Send the given notification.
      *
      * @param  mixed  $notifiable
-     * @param  Notification  $notification
+     * @param  Notification&SmsRuNotification  $notification
      *
      * @throws CouldNotSendNotification
      *
@@ -48,20 +49,15 @@ class SmsRuChannel
             if (is_string($message)) {
                 $message = new SmsRuMessage($message);
             }
-            if (! $message instanceof SmsRuMessage) {
+            if (!$message instanceof SmsRuMessage) {
                 throw CouldNotSendNotification::invalidMessageObject($message);
             }
 
             return $this->smsApi->sendMessage($recipient, $message);
-
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             $event = new NotificationFailed($notifiable, $notification, 'smsru', ['message' => $exception->getMessage(), 'exception' => $exception]);
 
-            if (function_exists('event')) { // Use event helper when possible to add Lumen support
-                event($event);
-            } else {
-                $this->events->fire($event);
-            }
+            $this->events->dispatch($event);
         }
     }
 

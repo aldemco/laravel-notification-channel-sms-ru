@@ -12,6 +12,7 @@ class SmsRuMessage
      * @var string
      */
     public $from = '';
+
     /**
      * The message content.
      *
@@ -52,6 +53,7 @@ class SmsRuMessage
     {
         return new static($content);
     }
+
     /**
      * @param  string  $content
      */
@@ -59,6 +61,7 @@ class SmsRuMessage
     {
         $this->content = $content;
     }
+
     /**
      * Set the message content.
      *
@@ -135,7 +138,7 @@ class SmsRuMessage
      * @param null $time
      * @return $this
      */
-    public function time(int $time = null)
+    public function time(?int $time = null)
     {
         $this->time = $time;
 

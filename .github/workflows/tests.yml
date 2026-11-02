@@ -1,0 +1,49 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tests:
+    name: Laravel ${{ matrix.laravel }} / PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - laravel: '7.*'
+            php: '7.4'
+          - laravel: '8.*'
+            php: '7.4'
+          - laravel: '9.*'
+            php: '8.0'
+          - laravel: '10.*'
+            php: '8.1'
+          - laravel: '11.*'
+            php: '8.2'
+          - laravel: '12.*'
+            php: '8.2'
+          - laravel: '13.*'
+            php: '8.3'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer:v2
+          coverage: none
+
+      - name: Resolve dependencies for Laravel ${{ matrix.laravel }}
+        run: >-
+          composer update --prefer-dist --no-interaction --no-progress
+          --with="illuminate/notifications:${{ matrix.laravel }}"
+          --with="illuminate/events:${{ matrix.laravel }}"
+          --with="illuminate/support:${{ matrix.laravel }}"
+
+      - name: Run test suite
+        run: composer test
